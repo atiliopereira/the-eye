@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres:12.8
+    env_file: .env
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+    expose:
+      - 5432
+
+  rabbitmq:
+    image: rabbitmq:3.9.4
+    expose:
+      - 5672
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    env_file: .env
+    command: ["./manage.py", "runserver", "0.0.0.0:8000"]
+    depends_on:
+      - rabbitmq
+      - db
