@@ -10,6 +10,8 @@ COPY requirements.txt /code/
 
 RUN pip install -r requirements.txt
 
-COPY .. /code/
+COPY . /code/
+
+RUN chmod +x docker/app/start.sh
 
 EXPOSE 8000

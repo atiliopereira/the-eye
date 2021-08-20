@@ -1,6 +1,7 @@
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 
+from events.models import Event
 from events.serializers import EventSerializer
 
 
