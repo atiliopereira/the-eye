@@ -12,9 +12,6 @@ class EventsViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     serializer_class = EventSerializer
 
     def create(self, request, *args, **kwargs):
-        serializer = EventSerializer(data=request.data)
+        create_event_task.apply_async(args=(request.data,))
 
-        if serializer.is_valid():
-            serializer.save().save()
-
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(None, status=status.HTTP_200_OK)
