@@ -1,5 +1,5 @@
 # the-eye
-Service that collect events data from web applications.
+Service that collects events data from web applications.
 
 ## Requirements
 
